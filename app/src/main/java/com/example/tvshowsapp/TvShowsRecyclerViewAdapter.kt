@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tvshowsapp.databinding.FragmentTvShowsBinding
 
 class TvShowsRecyclerViewAdapter(
-    private val values: TvShowsList
+    private val values: List<TvShowsData>
 ) : RecyclerView.Adapter<TvShowsRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,14 +23,14 @@ class TvShowsRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = values.data[position]
+        val item = values[position]
         holder.tvShowTitle.text = item.title
         holder.tvShowImage.loadImage(item.cover_url)
         holder.releaseDate.text = item.title
         holder.directedBy.text = item.directed_by
     }
 
-    override fun getItemCount(): Int = values.data.size
+    override fun getItemCount(): Int = values.size
 
     inner class ViewHolder(binding: FragmentTvShowsBinding) :
         RecyclerView.ViewHolder(binding.root) {

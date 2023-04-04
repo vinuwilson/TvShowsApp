@@ -41,6 +41,8 @@ class TvShowsFeature {
     @Test
     fun displayListOfTvShows() {
 
+        Thread.sleep(4000)
+
         assertRecyclerViewItemCount(R.id.tv_shows_list,17)
 
         onView(
