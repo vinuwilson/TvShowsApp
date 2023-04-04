@@ -1,0 +1,43 @@
+package com.example.tvshowsapp
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.tvshowsapp.databinding.FragmentTvShowsBinding
+
+class TvShowsRecyclerViewAdapter(
+    private val values: TvShowsList
+) : RecyclerView.Adapter<TvShowsRecyclerViewAdapter.ViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
+        return ViewHolder(
+            FragmentTvShowsBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = values.data[position]
+        holder.tvShowTitle.text = item.title
+        holder.tvShowImage.loadImage(item.cover_url)
+        holder.releaseDate.text = item.title
+        holder.directedBy.text = item.directed_by
+    }
+
+    override fun getItemCount(): Int = values.data.size
+
+    inner class ViewHolder(binding: FragmentTvShowsBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        val tvShowTitle: TextView = binding.tvShowTitle
+        val tvShowImage: ImageView = binding.tvShowImage
+        val releaseDate: TextView = binding.releaseDate
+        val directedBy: TextView = binding.directedBy
+    }
+
+}
