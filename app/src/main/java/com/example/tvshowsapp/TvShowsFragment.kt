@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
@@ -16,7 +17,8 @@ class TvShowsFragment : Fragment() {
     private lateinit var viewModel: TvShowsViewModel
     lateinit var viewModelFactory: TvShowsViewModelFactory
 
-    private val repository = TvShowsRepository()
+    private val service = TvShowsService()
+    private val repository = TvShowsRepository(service)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,12 +27,18 @@ class TvShowsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_tv_shows_list, container, false)
 
         setupViewModel()
-        viewModel.tvShowsList.observe(this as LifecycleOwner) { tvShowsList ->
-            if(tvShowsList.getOrNull() != null)
-            setupTvList(view, tvShowsList.getOrNull()!!)
-        }
+        observeListData()
 
         return view
+    }
+
+    private fun observeListData() {
+        viewModel.tvShowsList.observe(this as LifecycleOwner) { tvShowsList ->
+            if (tvShowsList.getOrNull() != null)
+                setupTvList(view, tvShowsList.getOrNull()!!)
+            else
+                Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setupTvList(view: View?, tvShowsList: List<TvShowsData>) {
