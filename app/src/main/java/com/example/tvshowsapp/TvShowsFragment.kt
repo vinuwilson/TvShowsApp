@@ -10,6 +10,9 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class TvShowsFragment : Fragment() {
@@ -17,7 +20,15 @@ class TvShowsFragment : Fragment() {
     private lateinit var viewModel: TvShowsViewModel
     lateinit var viewModelFactory: TvShowsViewModelFactory
 
-    private val service = TvShowsService()
+    private val retrofit : Retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl("https://mcuapi.herokuapp.com/")
+            .client(OkHttpClient())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+    private val api = retrofit.create(TvShowsAPI::class.java)
+    private val service = TvShowsService(api)
     private val repository = TvShowsRepository(service)
 
     override fun onCreateView(

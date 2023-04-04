@@ -26,7 +26,7 @@ class TvShowsRecyclerViewAdapter(
         val item = values[position]
         holder.tvShowTitle.text = item.title
         holder.tvShowImage.loadImage(item.cover_url)
-        holder.releaseDate.text = item.title
+        holder.releaseDate.text = item.release_date
         holder.directedBy.text = item.directed_by
     }
 
