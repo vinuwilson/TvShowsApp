@@ -2,8 +2,9 @@ package com.example.tvshowsapp
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import javax.inject.Inject
 
-class TvShowsViewModelFactory(
+class TvShowsViewModelFactory @Inject constructor(
     private val repository: TvShowsRepository
 ) : ViewModelProvider.Factory {
 

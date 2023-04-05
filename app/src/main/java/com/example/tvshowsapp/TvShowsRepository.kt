@@ -1,10 +1,10 @@
 package com.example.tvshowsapp
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
 
-class TvShowsRepository(
+class TvShowsRepository @Inject constructor(
     private val service: TvShowsService
 ) {
 

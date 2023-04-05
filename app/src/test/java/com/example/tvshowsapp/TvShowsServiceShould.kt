@@ -42,13 +42,13 @@ class TvShowsServiceShould : BaseUnitTest() {
         assertEquals("Something went wrong", service.fetchTvShowsList().first().exceptionOrNull()?.message)
     }
 
-    private fun mockSuccessfulCase(): TvShowsService {
+    private suspend fun mockSuccessfulCase(): TvShowsService {
         whenever(api.getTvShowsFromServer()).thenReturn(tvShowsList)
 
         return TvShowsService(api)
     }
 
-    private fun mockFailureCase(): TvShowsService {
+    private suspend fun mockFailureCase(): TvShowsService {
         whenever(api.getTvShowsFromServer()).thenThrow(RuntimeException("Damn backend developer"))
 
         return TvShowsService(api)
