@@ -1,5 +1,9 @@
 package com.example.tvshowsapp
 
+import com.example.tvshowsapp.data.TvShowsData
+import com.example.tvshowsapp.local.TvShowsDao
+import com.example.tvshowsapp.repository.TvShowsRepository
+import com.example.tvshowsapp.repository.TvShowsService
 import com.example.tvshowsapp.utils.BaseUnitTest
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
@@ -8,7 +12,6 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.mockito.Mockito.verify
 

@@ -1,4 +1,4 @@
-package com.example.tvshowsapp
+package com.example.tvshowsapp.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,10 +10,11 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tvshowsapp.*
+import com.example.tvshowsapp.data.TvShowsData
+import com.example.tvshowsapp.viewmodels.TvShowsViewModel
+import com.example.tvshowsapp.viewmodels.TvShowsViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -30,12 +31,22 @@ class TvShowsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_tv_shows_list, container, false)
 
         setupViewModel()
-        observeListData()
+        setupLoaderView(view.findViewById(R.id.loader))
+        observeListData(view.findViewById(R.id.tv_shows_list))
 
         return view
     }
 
-    private fun observeListData() {
+    private fun setupLoaderView(loader: View) {
+        viewModel.loader.observe(this as LifecycleOwner) { loading ->
+            when(loading){
+                true -> loader.visibility = View.VISIBLE
+                else -> loader.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun observeListData(view: View) {
         viewModel.tvShowsList.observe(this as LifecycleOwner) { tvShowsList ->
             if (tvShowsList.getOrNull() != null)
                 setupTvList(view, tvShowsList.getOrNull()!!)
@@ -44,7 +55,7 @@ class TvShowsFragment : Fragment() {
         }
     }
 
-    private fun setupTvList(view: View?, tvShowsList: List<TvShowsData>) {
+    private fun setupTvList(view: View, tvShowsList: List<TvShowsData>) {
         with(view as RecyclerView) {
             layoutManager = GridLayoutManager(context, 2)
             adapter = TvShowsRecyclerViewAdapter(tvShowsList)
@@ -55,9 +66,4 @@ class TvShowsFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[TvShowsViewModel::class.java]
     }
 
-    companion object {
-
-        @JvmStatic
-        fun newInstance() = TvShowsFragment().apply {}
-    }
 }

@@ -1,7 +1,5 @@
 package com.example.tvshowsapp
 
-import android.view.View
-import android.view.ViewGroup
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -10,9 +8,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.adevinta.android.barista.assertion.BaristaRecyclerViewAssertions.assertRecyclerViewItemCount
 import com.adevinta.android.barista.assertion.BaristaVisibilityAssertions.assertDisplayed
-import org.hamcrest.Description
-import org.hamcrest.Matcher
-import org.hamcrest.TypeSafeMatcher
+import com.adevinta.android.barista.assertion.BaristaVisibilityAssertions.assertNotDisplayed
+import com.example.tvshowsapp.utils.BaseUITest
 import org.hamcrest.core.AllOf.allOf
 import org.junit.Assert.*
 import org.junit.Rule
@@ -21,7 +18,7 @@ import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4::class)
-class TvShowsFeature {
+class TvShowsFeature : BaseUITest(){
 
     val mActivity = ActivityScenarioRule(MainActivity::class.java)
         @Rule get
@@ -73,21 +70,17 @@ class TvShowsFeature {
             .check(matches(isDisplayed()))
     }
 
-    fun nthChildOf(parentMatcher: Matcher<View>, childPosition: Int): Matcher<View> {
-        return object : TypeSafeMatcher<View>() {
-            override fun describeTo(description: Description) {
-                description.appendText("position $childPosition of parent ")
-                parentMatcher.describeTo(description)
-            }
+    @Test
+    fun displayProgressLoaderWhileFetchingTvShowsList() {
 
-            public override fun matchesSafely(view: View): Boolean {
-                if (view.parent !is ViewGroup) return false
-                val parent = view.parent as ViewGroup
+        assertDisplayed(R.id.loader)
+    }
 
-                return (parentMatcher.matches(parent)
-                        && parent.childCount > childPosition
-                        && parent.getChildAt(childPosition) == view)
-            }
-        }
+    @Test
+    fun hideLoader() {
+
+        Thread.sleep(2000)
+
+        assertNotDisplayed(R.id.loader)
     }
 }

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/tvShowsFragment"
-        android:name="com.example.tvshowsapp.TvShowsFragment"
+        android:name="com.example.tvshowsapp.views.TvShowsFragment"
         android:label="fragment_tv_shows_list"
         tools:layout="@layout/fragment_tv_shows_list" />
 </navigation>

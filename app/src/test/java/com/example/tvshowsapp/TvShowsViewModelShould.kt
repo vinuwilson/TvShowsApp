@@ -1,7 +1,10 @@
 package com.example.tvshowsapp
 
+import com.example.tvshowsapp.data.TvShowsData
+import com.example.tvshowsapp.repository.TvShowsRepository
 import com.example.tvshowsapp.utils.BaseUnitTest
 import com.example.tvshowsapp.utils.getValueForTest
+import com.example.tvshowsapp.viewmodels.TvShowsViewModel
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.whenever

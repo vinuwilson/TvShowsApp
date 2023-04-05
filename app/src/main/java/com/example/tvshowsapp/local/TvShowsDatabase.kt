@@ -1,9 +1,10 @@
-package com.example.tvshowsapp
+package com.example.tvshowsapp.local
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.tvshowsapp.data.TvShowsData
 
 @Database(entities = [TvShowsData::class], version = 1)
 abstract class TvShowsDatabase : RoomDatabase() {

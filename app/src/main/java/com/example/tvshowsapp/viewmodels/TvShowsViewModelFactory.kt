@@ -1,7 +1,8 @@
-package com.example.tvshowsapp
+package com.example.tvshowsapp.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.tvshowsapp.repository.TvShowsRepository
 import javax.inject.Inject
 
 class TvShowsViewModelFactory @Inject constructor(

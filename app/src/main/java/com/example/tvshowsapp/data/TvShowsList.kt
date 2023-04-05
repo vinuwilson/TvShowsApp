@@ -1,4 +1,4 @@
-package com.example.tvshowsapp
+package com.example.tvshowsapp.data
 
 data class TvShowsList(
     val `data`: List<TvShowsData>,

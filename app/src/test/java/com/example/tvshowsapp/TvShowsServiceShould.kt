@@ -1,5 +1,8 @@
 package com.example.tvshowsapp
 
+import com.example.tvshowsapp.data.TvShowsList
+import com.example.tvshowsapp.repository.TvShowsAPI
+import com.example.tvshowsapp.repository.TvShowsService
 import com.example.tvshowsapp.utils.BaseUnitTest
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times

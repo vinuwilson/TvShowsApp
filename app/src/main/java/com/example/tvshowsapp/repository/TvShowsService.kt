@@ -1,5 +1,6 @@
-package com.example.tvshowsapp
+package com.example.tvshowsapp.repository
 
+import com.example.tvshowsapp.data.TvShowsData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow

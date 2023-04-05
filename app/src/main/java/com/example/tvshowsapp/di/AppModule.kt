@@ -1,6 +1,9 @@
-package com.example.tvshowsapp
+package com.example.tvshowsapp.di
 
 import android.content.Context
+import com.example.tvshowsapp.repository.TvShowsAPI
+import com.example.tvshowsapp.local.TvShowsDao
+import com.example.tvshowsapp.local.TvShowsDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

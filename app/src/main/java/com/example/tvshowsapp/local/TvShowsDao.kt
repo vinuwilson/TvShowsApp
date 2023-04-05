@@ -1,9 +1,10 @@
-package com.example.tvshowsapp
+package com.example.tvshowsapp.local
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.tvshowsapp.data.TvShowsData
 
 @Dao
 interface TvShowsDao {
