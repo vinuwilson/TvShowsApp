@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.mockito.Mockito.verify
 
@@ -16,13 +17,14 @@ class TvShowsRepositoryShould : BaseUnitTest() {
     private val service: TvShowsService = mock()
     private val tvShowsList = mock<List<TvShowsData>>()
     private val exception = RuntimeException("Something went wrong")
+    private val tvShowsDao : TvShowsDao = mock()
 
     @Test
     fun getTvShowsListFromService(): Unit = runBlocking {
 
-        val repository = TvShowsRepository(service)
+        val repository = TvShowsRepository(service, tvShowsDao)
 
-        repository.getTvShowsList()
+        repository.getTvShowsList().first()
 
         verify(service, times(1)).fetchTvShowsList()
     }
@@ -40,7 +42,7 @@ class TvShowsRepositoryShould : BaseUnitTest() {
 
         val repository = mockFailureCase()
 
-        assertEquals(exception, repository.getTvShowsList().first().exceptionOrNull())
+        assertEquals(exception.message, repository.getTvShowsList().first().exceptionOrNull()!!.message)
     }
 
     private suspend fun mockSuccessfulCase(): TvShowsRepository {
@@ -50,7 +52,7 @@ class TvShowsRepositoryShould : BaseUnitTest() {
             }
         )
 
-        return TvShowsRepository(service)
+        return TvShowsRepository(service, tvShowsDao)
     }
 
     private suspend fun mockFailureCase(): TvShowsRepository {
@@ -60,6 +62,6 @@ class TvShowsRepositoryShould : BaseUnitTest() {
             }
         )
 
-        return TvShowsRepository(service)
+        return TvShowsRepository(service, tvShowsDao)
     }
 }
